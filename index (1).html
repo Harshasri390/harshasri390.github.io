@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harsha Govind Kamuju | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --surface: #111827;
+      --card: #161d2f;
+      --accent: #3b82f6;
+      --accent2: #06b6d4;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: #1e2d45;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 6vw;
+      background: rgba(11,15,26,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.85rem; font-weight: 400;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 6vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      width: 100%; display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .hero-text { animation: fadeUp .9s ease both; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.35);
+      color: var(--accent);
+      font-size: 0.75rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 500;
+      padding: 0.35rem 1rem; border-radius: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    h1 span { color: var(--accent); }
+    .hero-sub {
+      color: var(--muted); font-size: 1.05rem;
+      line-height: 1.75; max-width: 500px;
+      margin-bottom: 2rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 1.8rem; border-radius: 0.5rem;
+      font-size: 0.88rem; font-weight: 500;
+      text-decoration: none; cursor: pointer;
+      border: none; transition: all .25s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* avatar card */
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      animation: fadeUp .9s .2s ease both;
+      position: relative;
+    }
+    .avatar-ring {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800; color: #fff;
+      margin-bottom: 1.2rem;
+    }
+    .hero-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .hero-card p { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.4rem; }
+    .stat-row { display: flex; gap: 1.2rem; }
+    .stat { text-align: center; }
+    .stat strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--accent);
+    }
+    .stat span { font-size: 0.78rem; color: var(--muted); }
+
+    /* car bg */
+    .car-bg-img {
+      position: absolute;
+      bottom: 0; right: -2vw;
+      width: 75vw; max-width: 1000px;
+      z-index: 0;
+      opacity: 0.25;
+      pointer-events: none;
+      object-fit: contain;
+      object-position: bottom right;
+      animation: carFade 1.4s ease both;
+      mix-blend-mode: lighten;
+    }
+    @keyframes carFade {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 0.25; transform: translateX(0); }
+    }
+    .hero-text, .hero-card { position: relative; z-index: 1; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 6vw; }
+    .section-label {
+      font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      font-weight: 500; margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 800; margin-bottom: 3rem;
+    }
+    .section-title span { color: var(--accent); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .about-text p {
+      color: var(--muted); line-height: 1.9;
+      margin-bottom: 1rem; font-size: 0.97rem;
+    }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .tag {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.25);
+      color: var(--accent); font-size: 0.78rem;
+      padding: 0.3rem 0.85rem; border-radius: 2rem;
+    }
+    .info-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 1.8rem;
+    }
+    .info-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 0; border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon { font-size: 1.2rem; width: 2rem; text-align: center; }
+    .info-row div small { color: var(--muted); font-size: 0.75rem; display: block; }
+    .info-row div span { font-size: 0.92rem; font-weight: 500; }
+
+    /* ── SKILLS ── */
+    #skills { }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 1.6rem;
+      transition: border-color .25s, transform .25s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-card h4 {
+      font-family: 'Syne', sans-serif; font-size: 0.95rem;
+      font-weight: 700; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .skill-card h4 .icon { font-size: 1.3rem; }
+    .pill-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .pill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      font-size: 0.76rem; padding: 0.28rem 0.75rem;
+      border-radius: 2rem; color: var(--muted);
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--surface); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+      border-radius: 2px;
+    }
+    .tl-item { position: relative; margin-bottom: 2.5rem; }
+    .tl-dot {
+      position: absolute; left: -2.55rem; top: 0.35rem;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .tl-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 1.6rem;
+      transition: border-color .25s;
+    }
+    .tl-card:hover { border-color: var(--accent); }
+    .tl-meta {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .tl-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; }
+    .tl-company { color: var(--accent); font-size: 0.88rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .tl-date {
+      font-size: 0.75rem; color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      padding: 0.25rem 0.75rem; border-radius: 2rem;
+      white-space: nowrap;
+    }
+    .tl-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.8; }
+    .tl-desc li { margin-bottom: 0.35rem; }
+
+    /* ── CONTACT ── */
+    #contact { }
+    .contact-inner {
+      max-width: 640px; margin: 0 auto; text-align: center;
+    }
+    .contact-inner .section-label { display: block; }
+    .contact-inner .section-title { margin-bottom: 1rem; }
+    .contact-inner p { color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 0.6rem; padding: 0.8rem 1.4rem;
+      text-decoration: none; color: var(--text);
+      font-size: 0.88rem; font-weight: 400;
+      transition: all .25s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .contact-link .icon { font-size: 1.1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem 6vw;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.8rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      nav { padding: 1rem 4vw; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">HGK</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <!-- Sports Coupe Background Illustration – Aston Martin DBS-style -->
+    <svg class="car-bg" viewBox="0 0 1100 440" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+      <!-- ── GROUND SHADOW ── -->
+      <ellipse cx="555" cy="418" rx="460" ry="16" fill="#3b82f6" opacity="0.3"/>
+
+      <!-- ══════════════════════════════════
+           WHEELS  (rear = 260, front = 790)
+           tyre r=82, rim r=62, centre r=10
+           ══════════════════════════════════ -->
+
+      <!-- REAR WHEEL -->
+      <ellipse cx="262" cy="346" rx="82" ry="82" fill="#0b0f1a" stroke="#e2e8f0" stroke-width="2.5"/>
+      <!-- tyre sidewall highlight -->
+      <ellipse cx="262" cy="346" rx="82" ry="82" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
+      <!-- rim face -->
+      <ellipse cx="262" cy="346" rx="62" ry="62" fill="#111827" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- Y-spoke rim (9 twin-spokes like the reference) -->
+      <g stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round">
+        <line x1="262" y1="284" x2="256" y2="308"/><line x1="262" y1="284" x2="268" y2="308"/>
+        <line x1="301" y1="302" x2="284" y2="320"/><line x1="301" y1="302" x2="288" y2="328"/>
+        <line x1="316" y1="346" x2="292" y2="346"/><line x1="316" y1="346" x2="291" y2="352"/>
+        <line x1="300" y1="390" x2="284" y2="370"/><line x1="300" y1="390" x2="279" y2="364"/>
+        <line x1="262" y1="408" x2="257" y2="383"/><line x1="262" y1="408" x2="267" y2="383"/>
+        <line x1="224" y1="390" x2="240" y2="370"/><line x1="224" y1="390" x2="244" y2="364"/>
+        <line x1="208" y1="346" x2="232" y2="346"/><line x1="208" y1="346" x2="233" y2="352"/>
+        <line x1="223" y1="302" x2="240" y2="320"/><line x1="223" y1="302" x2="236" y2="328"/>
+      </g>
+      <!-- inner rim ring & centre -->
+      <ellipse cx="262" cy="346" rx="28" ry="28" fill="#0b0f1a" stroke="#3b82f6" stroke-width="1"/>
+      <ellipse cx="262" cy="346" rx="10" ry="10" fill="#3b82f6"/>
+
+      <!-- FRONT WHEEL -->
+      <ellipse cx="792" cy="346" rx="82" ry="82" fill="#0b0f1a" stroke="#e2e8f0" stroke-width="2.5"/>
+      <ellipse cx="792" cy="346" rx="82" ry="82" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
+      <ellipse cx="792" cy="346" rx="62" ry="62" fill="#111827" stroke="#94a3b8" stroke-width="1.5"/>
+      <g stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round">
+        <line x1="792" y1="284" x2="786" y2="308"/><line x1="792" y1="284" x2="798" y2="308"/>
+        <line x1="831" y1="302" x2="814" y2="320"/><line x1="831" y1="302" x2="818" y2="328"/>
+        <line x1="846" y1="346" x2="822" y2="346"/><line x1="846" y1="346" x2="821" y2="352"/>
+        <line x1="830" y1="390" x2="814" y2="370"/><line x1="830" y1="390" x2="809" y2="364"/>
+        <line x1="792" y1="408" x2="787" y2="383"/><line x1="792" y1="408" x2="797" y2="383"/>
+        <line x1="754" y1="390" x2="770" y2="370"/><line x1="754" y1="390" x2="774" y2="364"/>
+        <line x1="738" y1="346" x2="762" y2="346"/><line x1="738" y1="346" x2="763" y2="352"/>
+        <line x1="753" y1="302" x2="770" y2="320"/><line x1="753" y1="302" x2="766" y2="328"/>
+      </g>
+      <ellipse cx="792" cy="346" rx="28" ry="28" fill="#0b0f1a" stroke="#3b82f6" stroke-width="1"/>
+      <ellipse cx="792" cy="346" rx="10" ry="10" fill="#3b82f6"/>
+
+      <!-- ══════════════════════════════════
+           MAIN BODY  – traced from reference
+           Long bonnet, fastback, hunched rear
+           ══════════════════════════════════ -->
+      <path d="
+        M 88,340
+        L 100,316
+        Q 108,300 120,292
+        L 136,282
+        L 148,268
+        Q 162,250 182,240
+        L 210,228
+        Q 230,222 262,222
+        L 280,208
+        Q 290,196 300,186
+        L 320,168
+        Q 340,150 365,138
+        L 400,124
+        Q 440,112 490,108
+        L 580,104
+        Q 640,102 690,108
+        L 740,118
+        Q 780,130 810,148
+        L 840,170
+        Q 860,186 872,202
+        L 892,228
+        Q 902,244 908,260
+        L 916,282
+        Q 920,296 920,310
+        L 920,330
+        Q 920,340 916,346
+        L 900,346
+        Q 890,280 792,280
+        Q 694,280 684,346
+        L 368,346
+        Q 358,280 262,280
+        Q 166,280 156,346
+        L 100,346
+        Q 90,346 88,340
+        Z
+      " fill="#0d1321" stroke="#3b82f6" stroke-width="2"/>
+
+      <!-- ── BONNET ── long flat hood with centre vent crease -->
+      <path d="M 560,108 Q 660,106 750,122 L 820,152 Q 840,162 856,178 L 880,206 Q 840,190 760,172 Q 690,156 610,148 Q 560,144 500,144 L 450,144 Q 410,144 380,148 L 360,152 Q 400,132 440,120 Q 490,108 560,108Z"
+            fill="#101624" stroke="#3b82f6" stroke-width="1" opacity="0.8"/>
+      <!-- Bonnet centre crease line -->
+      <path d="M 560,106 Q 600,110 650,122 L 700,138 Q 740,152 770,172"
+            stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <!-- Hood vent/scoop (behind front wheel) -->
+      <path d="M 680,200 Q 700,190 730,188 L 740,198 Q 720,204 698,212Z"
+            fill="#3b82f6" opacity="0.5" stroke="#06b6d4" stroke-width="1"/>
+      <path d="M 690,204 Q 708,196 726,194" stroke="#06b6d4" stroke-width="0.8" fill="none" opacity="0.6"/>
+
+      <!-- ── ROOFLINE (fastback) ── -->
+      <path d="M 365,138 Q 420,100 510,90 Q 590,82 660,92 Q 710,100 740,118"
+            stroke="#3b82f6" stroke-width="2" fill="none"/>
+      <!-- Roof panel dark -->
+      <path d="M 365,138 Q 420,100 510,90 Q 590,82 660,92 Q 710,100 740,118 L 720,132 Q 680,116 620,108 Q 550,100 480,106 Q 420,112 380,148Z"
+            fill="#090e1a" stroke="none"/>
+
+      <!-- ── WINDSHIELD ── steep rake like the reference -->
+      <path d="M 380,148 Q 420,112 480,106 Q 540,100 600,110 L 640,126 Q 680,116 720,132 L 700,160 Q 660,148 610,144 Q 550,140 490,144 L 450,144 Q 420,148 400,158 Z"
+            fill="#0f1e38" stroke="#3b82f6" stroke-width="1.5" opacity="0.95"/>
+      <!-- windshield glare -->
+      <path d="M 410,152 Q 445,118 500,110 Q 550,104 590,116 L 570,138 Q 540,126 500,130 Q 462,134 432,152Z"
+            fill="#3b82f6" opacity="0.1"/>
+
+      <!-- ── SIDE WINDOWS ── -->
+      <!-- Main door window -->
+      <path d="M 400,158 Q 420,148 460,148 L 590,148 Q 620,148 640,156 L 630,186 Q 600,192 540,196 L 460,198 Q 420,196 400,188Z"
+            fill="#0f1e38" stroke="#3b82f6" stroke-width="1.2" opacity="0.9"/>
+      <!-- Rear quarter window – small triangular -->
+      <path d="M 330,172 Q 360,154 398,158 L 398,188 Q 365,192 340,196Z"
+            fill="#0f1e38" stroke="#3b82f6" stroke-width="1"/>
+
+      <!-- ── A-PILLAR ── -->
+      <line x1="380" y1="148" x2="400" y2="188" stroke="#3b82f6" stroke-width="2.5"/>
+      <!-- B-PILLAR -->
+      <line x1="598" y1="148" x2="634" y2="192" stroke="#3b82f6" stroke-width="2"/>
+      <!-- C-PILLAR fastback slope -->
+      <path d="M 638,192 Q 660,230 680,270 L 720,270 Q 700,230 720,190 L 720,132"
+            stroke="#3b82f6" stroke-width="2" fill="none"/>
+
+      <!-- ── DOOR CHARACTER LINE (wide sweeping crease) ── -->
+      <path d="M 158,262 Q 260,240 420,232 Q 560,226 700,238 Q 800,248 890,272"
+            stroke="#06b6d4" stroke-width="2" fill="none" opacity="0.7"/>
+      <!-- lower body crease -->
+      <path d="M 140,295 Q 300,285 500,282 Q 680,280 880,292"
+            stroke="#06b6d4" stroke-width="1" fill="none" opacity="0.35"/>
+
+      <!-- ── SIDE GILL / AIR VENT (behind front arch) ── -->
+      <path d="M 668,230 Q 688,222 710,222 L 714,246 Q 692,248 670,250Z"
+            fill="none" stroke="#06b6d4" stroke-width="1.5"/>
+      <line x1="672" y1="234" x2="712" y2="228" stroke="#06b6d4" stroke-width="0.8" opacity="0.5"/>
+      <line x1="672" y1="240" x2="712" y2="236" stroke="#06b6d4" stroke-width="0.8" opacity="0.5"/>
+      <line x1="672" y1="246" x2="712" y2="244" stroke="#06b6d4" stroke-width="0.8" opacity="0.5"/>
+
+      <!-- ── SIDE MIRROR ── -->
+      <path d="M 640,190 L 666,180 L 672,194 L 648,200Z" fill="#3b82f6" stroke="#3b82f6" stroke-width="0.5" opacity="0.9"/>
+
+      <!-- ── REAR LIGHTS ── narrow horizontal wrap -->
+      <path d="M 100,260 L 148,252 L 152,278 L 100,282Z" fill="#3b82f6" opacity="0.85"/>
+      <!-- upper tail light strip -->
+      <path d="M 100,255 L 220,244" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+      <!-- lower tail light -->
+      <rect x="100" y="280" width="50" height="14" rx="3" fill="#3b82f6" opacity="0.5"/>
+
+      <!-- ── REAR BUMPER / DIFFUSER ── -->
+      <path d="M 88,330 Q 100,316 120,310 L 148,308 L 148,340 L 100,346Z"
+            fill="#0d1321" stroke="#3b82f6" stroke-width="1.5"/>
+      <!-- diffuser fins -->
+      <line x1="108" y1="318" x2="144" y2="315" stroke="#06b6d4" stroke-width="1" opacity="0.6"/>
+      <line x1="104" y1="326" x2="144" y2="322" stroke="#06b6d4" stroke-width="1" opacity="0.6"/>
+      <line x1="100" y1="334" x2="144" y2="330" stroke="#06b6d4" stroke-width="1" opacity="0.6"/>
+
+      <!-- ── REAR SPOILER ── lip spoiler on fastback -->
+      <path d="M 100,248 Q 120,240 140,240 L 142,252 Q 122,254 102,260Z"
+            fill="#3b82f6" stroke="#3b82f6" stroke-width="0.5" opacity="0.7"/>
+
+      <!-- ── FRONT BUMPER / GRILLE ── wide iconic grille mouth -->
+      <path d="M 878,240 Q 892,220 910,210 L 918,226 Q 904,238 892,252Z"
+            fill="#0d1321" stroke="#3b82f6" stroke-width="1.5"/>
+      <!-- front lower splitter -->
+      <path d="M 862,316 Q 882,308 916,308 L 918,322 Q 880,322 860,326Z"
+            fill="#3b82f6" opacity="0.6"/>
+      <!-- grille mesh lines -->
+      <path d="M 880,244 Q 900,236 916,230" stroke="#06b6d4" stroke-width="1" fill="none" opacity="0.5"/>
+      <path d="M 876,254 Q 898,246 916,240" stroke="#06b6d4" stroke-width="1" fill="none" opacity="0.5"/>
+      <path d="M 873,264 Q 896,256 916,250" stroke="#06b6d4" stroke-width="1" fill="none" opacity="0.5"/>
+      <!-- vertical grille bars -->
+      <line x1="890" y1="234" x2="886" y2="268" stroke="#06b6d4" stroke-width="0.8" opacity="0.4"/>
+      <line x1="900" y1="230" x2="897" y2="264" stroke="#06b6d4" stroke-width="0.8" opacity="0.4"/>
+      <line x1="910" y1="226" x2="908" y2="260" stroke="#06b6d4" stroke-width="0.8" opacity="0.4"/>
+
+      <!-- ── FRONT HEADLIGHT ── sweeping sharp light -->
+      <path d="M 840,182 Q 860,172 888,176 L 912,210 Q 894,208 872,212 Q 854,214 840,208Z"
+            fill="#0f1e38" stroke="#3b82f6" stroke-width="1.5" opacity="0.95"/>
+      <!-- DRL strip -->
+      <path d="M 844,188 Q 868,180 892,184" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <!-- headlight inner lens -->
+      <ellipse cx="876" cy="200" rx="14" ry="10" fill="#3b82f6" opacity="0.5"/>
+
+      <!-- ── FRONT ARCH LOWER DUCT ── -->
+      <path d="M 856,290 Q 868,280 892,278 L 896,296 Q 870,298 854,304Z"
+            fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+
+    </svg>
+
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-tag">📍 Turin, Italy · Open to relocation</div>
+        <h1>Harsha Govind<br><span>Kamuju</span></h1>
+        <p class="hero-sub">
+          Validation &amp; Test Engineer with 4+ years of experience in automotive system engineering,
+          infotainment, and HIL/bench testing. Specialized in CAN/LIN/Ethernet protocols and test automation.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get in Touch</a>
+          <a href="#experience" class="btn btn-outline">View Experience</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="avatar-ring">HK</div>
+        <h3>Harsha Govind Kamuju</h3>
+        <p>Validation &amp; Test Engineer · Automotive</p>
+        <div class="stat-row">
+          <div class="stat"><strong>4+</strong><span>Years Exp.</span></div>
+          <div class="stat"><strong>2</strong><span>OEMs</span></div>
+          <div class="stat"><strong>10+</strong><span>Tools</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Who I am</div>
+    <div class="section-title">About <span>Me</span></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am a Validation &amp; Test Engineer with over 4 years of hands-on experience in the automotive sector,
+          working across system engineering, infotainment, and Hardware-in-the-Loop (HIL) testing environments.
+        </p>
+        <p>
+          My current work focuses on VW/Audi infotainment validation, including CAN communication analysis,
+          ECU flashing, regression testing, and automation using CAPL and Python. Previously at Hyundai,
+          I contributed to infotainment component specifications and multi-function vehicle testing.
+        </p>
+        <p>
+          I hold a permanent residence permit in Italy and am fluent in English, Italian (B1), and Telugu.
+        </p>
+        <div class="about-tags">
+          <span class="tag">System Engineering</span>
+          <span class="tag">HIL Testing</span>
+          <span class="tag">Infotainment</span>
+          <span class="tag">CAPL / Python</span>
+          <span class="tag">Automotive Protocols</span>
+          <span class="tag">ECU Flashing</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div><small>Location</small><span>Turin, Italy</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🎓</div>
+          <div><small>Degree</small><span>B.Tech / M.Tech – Engineering</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🏢</div>
+          <div><small>Current Role</small><span>Validation &amp; Test Engineer</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🚗</div>
+          <div><small>Domain</small><span>Automotive – Infotainment / HIL</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📄</div>
+          <div><small>Work Permit</small><span>Permanent Residence – Italy</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🌐</div>
+          <div><small>Languages</small><span>English · Italian (B1) · Telugu</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Technical Expertise</div>
+    <div class="section-title">Skills &amp; <span>Tools</span></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4><span class="icon">🔧</span> Testing Tools</h4>
+        <div class="pill-wrap">
+          <span class="pill">CANalyzer</span>
+          <span class="pill">CANoe</span>
+          <span class="pill">dSPACE ControlDesk</span>
+          <span class="pill">TestStand</span>
+          <span class="pill">ODIS</span>
+          <span class="pill">IDEX</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4><span class="icon">📡</span> Protocols</h4>
+        <div class="pill-wrap">
+          <span class="pill">CAN</span>
+          <span class="pill">LIN</span>
+          <span class="pill">Ethernet</span>
+          <span class="pill">UDS</span>
+          <span class="pill">MOST</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4><span class="icon">💻</span> Programming</h4>
+        <div class="pill-wrap">
+          <span class="pill">CAPL</span>
+          <span class="pill">Python</span>
+          <span class="pill">LabVIEW</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4><span class="icon">🗂️</span> Engineering & PM</h4>
+        <div class="pill-wrap">
+          <span class="pill">Jira</span>
+          <span class="pill">DOORS</span>
+          <span class="pill">HIL/SIL Testing</span>
+          <span class="pill">Regression Testing</span>
+          <span class="pill">ECU Flashing</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4><span class="icon">📋</span> Standards</h4>
+        <div class="pill-wrap">
+          <span class="pill">ISO 26262</span>
+          <span class="pill">ASPICE</span>
+          <span class="pill">IEC 61375</span>
+          <span class="pill">UIC 556/558</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4><span class="icon">🚗</span> Domain Knowledge</h4>
+        <div class="pill-wrap">
+          <span class="pill">Infotainment Systems</span>
+          <span class="pill">ADAS</span>
+          <span class="pill">Body Control</span>
+          <span class="pill">TCMS (Rail)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Career</div>
+    <div class="section-title">Work <span>Experience</span></div>
+    <div class="timeline">
+
+      <!-- Role 1 -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <div>
+              <div class="tl-title">Railways Jr. System Engineer</div>
+              <div class="tl-company">Abylsen – Turin, Italy</div>
+            </div>
+            <span class="tl-date">Aug. 2025 – Present</span>
+          </div>
+          <ul class="tl-desc">
+            <li>Managed system connections using Interface Control Documents (ICDs) and Microsoft Visio for schematic architecture.</li>
+            <li>Led testing and validation campaigns using strict quality checks to close open technical points and fix anomalies.</li>
+            <li>Defined and managed interfaces between various systems including physical, electrical, and data interfaces.</li>
+            <li>Reported weekly progress to managers using detailed root cause analysis to improve fleet performance.</li>
+            <li>Applied RAMS principles and SDLC/STLC processes to ensure safety and reliability in critical railway systems.</li>
+            <li>Hands-on expertise in TCMS architectures with working knowledge of IEC 61375, UIC 556 and UIC 558.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Role 2 -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <div>
+              <div class="tl-title">Validation &amp; Test Engineer</div>
+              <div class="tl-company">Abylsen (Client: Italdesign) – Moncalieri, Turin, Italy</div>
+            </div>
+            <span class="tl-date">Sept. 2022 – Jul. 2025</span>
+          </div>
+          <ul class="tl-desc">
+            <li>Worked on VW and Audi test bench architecture as a Test Engineer; exposure to diagnostic tools IDEX, ODIS and CP-Tool.</li>
+            <li>Flashed ECUs including CMOD, MEB, MIB3 and ICAS via IDEX and ODIS; flashed AED2 (Android) devices via ADB (OTM) and REM (OTA).</li>
+            <li>Utilized CANalyzer to monitor and analyze CAN bus communication in HIL setups, generating trace logs and detailed reports.</li>
+            <li>Configured HIL environments using dSPACE ControlDesk and developed automated regression test suites in TESTstand, reducing validation cycle time by 30%.</li>
+            <li>Raised and managed KPM &amp; Jira tickets; performed weekly smoke, sanity, and regression testing for every new release.</li>
+            <li>Executed automated and manual test cases using CAPL and Python; involved in ADAS features testing (ACC, Lane Assist, AEB, Distance Warning, Speed Limit Adaptation).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Role 3 -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-meta">
+            <div>
+              <div class="tl-title">System Engineer</div>
+              <div class="tl-company">Hyundai Motor Company – Hyderabad, India</div>
+            </div>
+            <span class="tl-date">Aug. 2015 – Jul. 2017</span>
+          </div>
+          <ul class="tl-desc">
+            <li>2 years of experience in the automotive industry focusing on in-vehicle infotainment systems (Radio FM/DAB, Audio, Video, Bluetooth).</li>
+            <li>Authored component specifications for the entire infotainment system from the project Technical Annex.</li>
+            <li>Wrote and executed test cases for Radio FM/DAB, Audio, Video, BT, Android Auto &amp; CarPlay.</li>
+            <li>Tested software involving CAN, LIN, FLEXRAY, Ethernet and UDS protocols.</li>
+            <li>Used tools including CANoe, CANalyzer, IBM DOORS, JIRA, CONFLUENCE and Microsoft Office Suite.</li>
+            <li>Followed ISO 26262 standards throughout the project lifecycle.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <span class="section-label">Let's Connect</span>
+      <div class="section-title">Get in <span>Touch</span></div>
+      <p>
+        I am currently open to new opportunities in validation, system testing, or automotive software engineering.
+        Feel free to reach out via email or LinkedIn.
+      </p>
+      <div class="contact-links">
+        <a href="/cdn-cgi/l/email-protection#2e464f5c5d464f1f161c181a1d1e6e49434f4742004d4143" class="contact-link">
+          <span class="icon">✉️</span> Email Me
+        </a>
+        <a href="https://www.linkedin.com/in/harsha-kamuju-40b764183/" target="_blank" class="contact-link">
+          <span class="icon">💼</span> LinkedIn
+        </a>
+        <a href="tel:+393206486173" class="contact-link">
+          <span class="icon">📞</span> +39 320 648 6173
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026
